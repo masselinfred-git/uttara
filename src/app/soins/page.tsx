@@ -8,9 +8,26 @@ import { SoinsIntro } from "@/components/sections/soins/SoinsIntro";
 import { WhoForSection } from "@/components/sections/soins/WhoForSection";
 
 export const metadata: Metadata = {
-  title: "Soins ayurvédiques",
+  title: "Soins ayurvédiques et massages au Poët",
   description:
-    "Découvrez les soins ayurvédiques proposés par Uttara : bilan ayurvédique, massages, bol Kansu et accompagnements de bien-être.",
+    "Découvrez les soins proposés par Uttara au Poët : massage ayurvédique Abhyanga, Bol Kansu, Udvartana et Kobido dans un cadre chaleureux dans les Hautes-Alpes.",
+
+  alternates: {
+    canonical: "/soins",
+  },
+
+  openGraph: {
+    title: "Soins ayurvédiques et massages | Uttara",
+    description:
+      "Massages ayurvédiques, Bol Kansu, Udvartana et Kobido au Poët dans les Hautes-Alpes.",
+    url: "/soins",
+    images: [
+      {
+        url: "/images/soins/massage-ayurvedique-home.webp",
+        alt: "Massage ayurvédique chez Uttara",
+      },
+    ],
+  },
 };
 
 export default function SoinsPage() {

@@ -6,16 +6,16 @@ export function SoinsIntro() {
     <Section className="bg-[var(--background-light)]">
       <Container>
         <div className="mx-auto max-w-5xl text-center">
-          <p className="font-script text-4xl text-[var(--earth)] md:text-5xl">
+          <p className="font-script text-3xl text-[var(--earth)] sm:text-4xl md:text-5xl">
             Une approche globale
           </p>
 
-          <h2 className="mt-5 text-4xl leading-tight sm:text-5xl md:text-6xl">
+          <h2 className="mt-4 text-3xl leading-tight sm:mt-5 sm:text-5xl md:text-6xl">
             Écouter ce que le corps exprime,
             avant de vouloir le faire taire.
           </h2>
 
-          <p className="mx-auto mt-8 max-w-3xl text-base leading-8 text-[var(--muted)] md:text-lg">
+          <p className="mx-auto mt-6 max-w-3xl text-sm leading-7 text-[var(--muted)] sm:mt-8 sm:text-base sm:leading-8 md:text-lg">
             Chaque soin est envisagé comme un temps de pause,
             d’écoute et de rééquilibrage. L’approche ayurvédique
             considère la personne dans sa globalité, avec son rythme,

@@ -7,98 +7,104 @@ export function FormationList() {
   return (
     <Section>
       <Container>
-        <div className="mb-14 md:mb-20">
-          <p className="font-script text-4xl text-[var(--earth)] md:text-5xl">
+        <div className="mb-12 sm:mb-14 md:mb-20">
+          <p className="font-script text-3xl text-[var(--earth)] sm:text-4xl md:text-5xl">
             Les formations
           </p>
 
-          <h2 className="mt-3 max-w-4xl text-4xl leading-tight sm:text-5xl md:text-6xl">
+          <h2 className="mt-3 max-w-4xl text-3xl leading-tight sm:text-5xl md:text-6xl">
             Choisir sa voie,
             progresser à son rythme.
           </h2>
         </div>
 
-        <div className="space-y-10">
+        <div className="space-y-8 sm:space-y-10">
           {formations.map((formation, index) => (
             <article
               key={formation.slug}
               className="overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--background-light)]"
             >
               <div className="grid lg:grid-cols-[0.32fr_0.68fr]">
-                <div className="flex flex-col justify-between bg-[var(--forest-dark)] p-8 text-[var(--background-light)] md:p-10">
+                {/* COLONNE INFORMATIONS */}
+                <div className="flex flex-col justify-between bg-[var(--forest-dark)] p-6 text-[var(--background-light)] sm:p-8 md:p-10">
                   <div>
-                    <span className="text-sm text-white/45">
+                    <span className="text-xs text-white/45 sm:text-sm">
                       0{index + 1}
                     </span>
 
-                    <p className="mt-8 font-script text-3xl text-[var(--hemp)]">
+                    <p className="mt-6 font-script text-3xl text-[var(--hemp)] sm:mt-8">
                       {formation.eyebrow}
                     </p>
 
-                    <h3 className="mt-3 text-3xl leading-tight md:text-4xl">
+                    <h3 className="mt-3 text-2xl leading-tight sm:text-3xl md:text-4xl">
                       {formation.shortTitle}
                     </h3>
                   </div>
 
-                  <div className="mt-10 space-y-4 border-t border-white/15 pt-6">
+                  <div className="mt-8 grid grid-cols-2 gap-5 border-t border-white/15 pt-6 sm:mt-10 lg:block lg:space-y-4">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.18em] text-white/45">
+                      <p className="text-[10px] uppercase tracking-[0.18em] text-white/45 sm:text-xs">
                         Durée
                       </p>
 
-                      <p className="mt-1 text-lg">
+                      <p className="mt-1 text-base sm:text-lg">
                         {formation.duration}
-                        {formation.hours ? ` · ${formation.hours}` : ""}
+                        {formation.hours
+                          ? ` · ${formation.hours}`
+                          : ""}
                       </p>
                     </div>
 
                     <div>
-                      <p className="text-xs uppercase tracking-[0.18em] text-white/45">
+                      <p className="text-[10px] uppercase tracking-[0.18em] text-white/45 sm:text-xs">
                         Tarif
                       </p>
 
-                      <p className="mt-1 text-lg">
+                      <p className="mt-1 text-base sm:text-lg">
                         {formation.price}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-8 md:p-10 lg:p-12">
-                  <h3 className="text-4xl leading-tight md:text-5xl">
+                {/* CONTENU */}
+                <div className="p-6 sm:p-8 md:p-10 lg:p-12">
+                  <h3 className="text-3xl leading-tight sm:text-4xl md:text-5xl">
                     {formation.title}
                   </h3>
 
-                  <p className="mt-6 max-w-3xl text-lg leading-8 text-[var(--muted)]">
+                  <p className="mt-5 max-w-3xl text-sm leading-7 text-[var(--muted)] sm:mt-6 sm:text-base sm:leading-8 md:text-lg">
                     {formation.description}
                   </p>
 
-                  <div className="mt-8 grid gap-8 md:grid-cols-2">
+                  <div className="mt-7 grid gap-7 sm:mt-8 md:grid-cols-2 md:gap-8">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] sm:text-xs">
                         Objectifs
                       </p>
 
                       <ul className="mt-4 space-y-3">
-                        {formation.objectives.slice(0, 4).map((objective) => (
-                          <li
-                            key={objective}
-                            className="flex gap-3 leading-7 text-[var(--muted)]"
-                          >
-                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--gold)]" />
+                        {formation.objectives
+                          .slice(0, 4)
+                          .map((objective) => (
+                            <li
+                              key={objective}
+                              className="flex gap-3 text-sm leading-7 text-[var(--muted)] sm:text-base"
+                            >
+                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--gold)]" />
 
-                            {objective}
-                          </li>
-                        ))}
+                              {objective}
+                            </li>
+                          ))}
                       </ul>
                     </div>
 
                     <div>
-                      <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] sm:text-xs">
                         Modalités
                       </p>
 
-                      <div className="mt-4 space-y-3 leading-7 text-[var(--muted)]">
+                      <div className="mt-4 space-y-3 text-sm leading-7 text-[var(--muted)] sm:text-base">
                         <p>
                           {formation.individual
                             ? "Formation possible en accompagnement individuel."
@@ -107,7 +113,8 @@ export function FormationList() {
 
                         {formation.maxParticipants && (
                           <p>
-                            Groupe limité à {formation.maxParticipants} participants.
+                            Groupe limité à{" "}
+                            {formation.maxParticipants} participants.
                           </p>
                         )}
 
@@ -125,12 +132,15 @@ export function FormationList() {
                     </div>
                   </div>
 
-                  <div className="mt-9 flex flex-wrap gap-4">
+                  <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:gap-4">
                     <Button href="/contact">
                       Demander le programme
                     </Button>
 
-                    <Button href="/contact" variant="outlineDark">
+                    <Button
+                      href="/contact"
+                      variant="outlineDark"
+                    >
                       S’inscrire
                     </Button>
                   </div>

@@ -109,12 +109,12 @@ export function CareList() {
     <Section>
       <Container>
         {/* INTRODUCTION */}
-        <div className="mb-14 md:mb-20">
-          <p className="font-script text-4xl text-[var(--earth)] md:text-5xl">
+        <div className="mb-12 sm:mb-14 md:mb-20">
+          <p className="font-script text-3xl text-[var(--earth)] sm:text-4xl md:text-5xl">
             Les soins
           </p>
 
-          <h2 className="mt-3 max-w-4xl text-4xl leading-tight sm:text-5xl md:text-6xl">
+          <h2 className="mt-3 max-w-4xl text-3xl leading-tight sm:text-5xl md:text-6xl">
             Des rituels pour ralentir,
             <br className="hidden md:block" />
             ressentir et revenir à soi.
@@ -122,18 +122,18 @@ export function CareList() {
         </div>
 
         {/* ESPACE DÉTENTE */}
-        <div className="mb-20 overflow-hidden rounded-[2rem] bg-[var(--forest-dark)] text-[var(--background-light)]">
-          <div className="grid gap-8 px-7 py-9 md:grid-cols-[1fr_auto] md:items-center md:px-10 md:py-10">
+        <div className="mb-14 overflow-hidden rounded-[2rem] bg-[var(--forest-dark)] text-[var(--background-light)] sm:mb-20">
+          <div className="grid gap-7 px-6 py-8 sm:px-7 sm:py-9 md:grid-cols-[1fr_auto] md:items-center md:px-10 md:py-10">
             <div>
               <p className="font-script text-3xl text-[var(--hemp)] md:text-4xl">
                 Prolonger l’expérience
               </p>
 
-              <h3 className="mt-2 text-3xl md:text-4xl">
+              <h3 className="mt-2 text-2xl sm:text-3xl md:text-4xl">
                 Espace détente, tisanerie & sauna
               </h3>
 
-              <p className="mt-4 max-w-2xl leading-7 text-white/70">
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70 sm:text-base">
                 Après votre soin, vous pouvez prolonger ce moment
                 dans l’espace détente et profiter de la tisanerie
                 et du sauna.
@@ -142,7 +142,7 @@ export function CareList() {
 
             <div className="border-t border-white/20 pt-6 md:min-w-[220px] md:border-t-0 md:border-l md:pl-10 md:pt-0">
               <div>
-                <p className="text-xs uppercase tracking-[0.18em] text-white/50">
+                <p className="text-[10px] uppercase tracking-[0.18em] text-white/50 sm:text-xs">
                   Accès 20 min
                 </p>
 
@@ -152,7 +152,7 @@ export function CareList() {
               </div>
 
               <div className="mt-5">
-                <p className="text-xs uppercase tracking-[0.18em] text-white/50">
+                <p className="text-[10px] uppercase tracking-[0.18em] text-white/50 sm:text-xs">
                   30 min supplémentaires
                 </p>
 
@@ -165,7 +165,7 @@ export function CareList() {
         </div>
 
         {/* SOINS */}
-        <div className="space-y-20 md:space-y-28">
+        <div className="space-y-16 sm:space-y-20 md:space-y-28">
           {soins.map((soin, index) => (
             <article
               key={soin.title}
@@ -174,10 +174,10 @@ export function CareList() {
               {/* IMAGE */}
               <div
                 className={`
-                  relative min-h-[430px]
+                  relative min-h-[350px]
                   overflow-hidden rounded-[2rem]
                   bg-[var(--surface)]
-                  sm:min-h-[520px]
+                  sm:min-h-[500px]
                   lg:min-h-[610px]
                   ${index % 2 === 1 ? "lg:order-2" : ""}
                 `}
@@ -193,20 +193,20 @@ export function CareList() {
 
               {/* INFORMATIONS */}
               <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--muted)] sm:text-xs sm:tracking-[0.25em]">
                   {soin.eyebrow}
                 </p>
 
-                <h3 className="mt-4 text-4xl leading-tight sm:text-5xl">
+                <h3 className="mt-4 text-3xl leading-tight sm:text-5xl">
                   {soin.title}
                 </h3>
 
-                <p className="mt-6 max-w-xl text-lg leading-8">
+                <p className="mt-5 max-w-xl text-base leading-7 sm:mt-6 sm:text-lg sm:leading-8">
                   {soin.description}
                 </p>
 
                 {soin.details && (
-                  <p className="mt-4 max-w-xl leading-8 text-[var(--muted)]">
+                  <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--muted)] sm:text-base sm:leading-8">
                     {soin.details}
                   </p>
                 )}
@@ -219,7 +219,7 @@ export function CareList() {
                       className="grid grid-cols-2 gap-4 border-b border-[var(--border)] py-5 last:border-b-0"
                     >
                       <div>
-                        <span className="block text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
+                        <span className="block text-[10px] uppercase tracking-[0.18em] text-[var(--muted)] sm:text-xs">
                           Durée
                         </span>
 
@@ -229,7 +229,7 @@ export function CareList() {
                       </div>
 
                       <div>
-                        <span className="block text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
+                        <span className="block text-[10px] uppercase tracking-[0.18em] text-[var(--muted)] sm:text-xs">
                           Tarif
                         </span>
 
@@ -258,7 +258,7 @@ export function CareList() {
                   </p>
                 </div>
 
-                <div className="mt-9">
+                <div className="mt-7 sm:mt-9">
                   <Button href="/contact">
                     Réserver ce soin
                   </Button>

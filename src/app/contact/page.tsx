@@ -9,9 +9,20 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact et accès",
   description:
-    "Contactez Uttara pour toute question concernant les soins ayurvédiques, les formations ou leur financement.",
+    "Contactez Uttara pour un soin, une formation ou une demande de financement. Uttara vous accueille au 12 rue du Presbytère, 05300 Le Poët.",
+
+  alternates: {
+    canonical: "/contact",
+  },
+
+  openGraph: {
+    title: "Contact | Uttara",
+    description:
+      "Contacter Uttara et préparer votre venue au Poët dans les Hautes-Alpes.",
+    url: "/contact",
+  },
 };
 
 export default function ContactPage() {
