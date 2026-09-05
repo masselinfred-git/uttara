@@ -33,13 +33,13 @@ export function HeroVideo() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10" />
 
       {/* CONTENU */}
-      <Container className="relative z-10 flex min-h-[88svh] items-center">
+      <Container className="relative z-10 flex min-h-[88svh] items-center py-16 md:py-20">
         <div className="max-w-3xl pt-24 text-[#f4ede3]">
           <p className="mb-5 text-xs font-medium uppercase tracking-[0.3em] md:text-sm">
             Ayurveda · Soins · Formations
           </p>
 
-          <h1 className="text-5xl leading-[0.95] font-medium md:text-7xl lg:text-8xl">
+          <h1 className="text-5xl leading-[0.95] font-medium sm:text-6xl md:text-7xl lg:text-8xl">
             Revenir à soi.
             <br />
             Se reconnecter

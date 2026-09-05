@@ -74,3 +74,12 @@ button,
 a {
   -webkit-tap-highlight-color: transparent;
 }
+
+img,
+video {
+  display: block;
+}
+
+body {
+  overflow-x: hidden;
+}

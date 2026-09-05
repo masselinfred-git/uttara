@@ -10,7 +10,7 @@ export function CareSection() {
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           {/* IMAGE */}
-          <div className="relative min-h-[520px] overflow-hidden rounded-[2rem] bg-[var(--surface)]">
+          <div className="relative min-h-[420px] overflow-hidden rounded-[1.75rem] bg-[var(--surface)] sm:min-h-[500px] lg:min-h-[620px]">
             <Image
               src="/images/soins/soin-home.webp"
               alt="Soin ayurvédique chez Uttara"
@@ -29,7 +29,7 @@ export function CareSection() {
               Les soins
             </p>
 
-            <h2 className="mt-5 text-4xl leading-tight md:text-6xl">
+            <h2 className="mt-5 text-4xl leading-tight sm:text-5xl md:text-6xl">
               Écouter le corps,
               accompagner l’énergie.
             </h2>

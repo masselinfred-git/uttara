@@ -18,7 +18,7 @@ const formations = [
     title: "Approche énergétique",
     text: "Approfondir l’écoute du corps et des circulations énergétiques.",
   },
-  {
+  { 
     number: "04",
     title: "Transmission",
     text: "Intégrer les pratiques dans une approche professionnelle et personnelle.",
@@ -39,7 +39,7 @@ export function TrainingPreview() {
               Les formations
             </p>
 
-            <h2 className="mt-5 text-4xl leading-tight md:text-6xl">
+            <h2 className="mt-5 text-4xl leading-tight sm:text-5xl md:text-6xl">
               Apprendre,
               expérimenter,
               transmettre.

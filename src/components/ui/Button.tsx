@@ -30,7 +30,7 @@ export function Button({
         inline-flex min-h-12 items-center justify-center
         rounded-full px-7 py-3.5
         text-sm font-medium
-        transition-all duration-300 
+        transition-all duration-300
         hover:-translate-y-0.5
         ${styles[variant]}
       `}

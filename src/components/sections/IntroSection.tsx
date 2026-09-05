@@ -10,7 +10,7 @@ export function IntroSection() {
             Bienvenue chez Uttara
           </p>
 
-          <h2 className="mx-auto mt-5 max-w-4xl text-4xl leading-tight md:text-6xl">
+          <h2 className="mx-auto mt-5 max-w-4xl text-4xl leading-tight sm:text-5xl md:text-6xl">
             Un lieu où l’on prend le temps
             de revenir au corps,
             au vivant et à soi.
