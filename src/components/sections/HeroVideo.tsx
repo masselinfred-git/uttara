@@ -28,7 +28,7 @@ export function HeroVideo() {
       </div>
 
       {/* Overlay chaud */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/20 to-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-black/5" />
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10" />
 
@@ -49,7 +49,7 @@ export function HeroVideo() {
             </span>
           </h1>
 
-          <p className="mt-8 max-w-xl text-base leading-7 text-white/85 md:text-lg">
+          <p className="mt-8 max-w-xl text-base leading-7 text-white/90 md:text-lg">
             Un espace chaleureux où l’Ayurveda,
             le soin et l’énergie se rencontrent.
           </p>

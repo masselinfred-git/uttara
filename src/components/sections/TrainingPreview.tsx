@@ -61,7 +61,7 @@ export function TrainingPreview() {
             {formations.map((formation) => (
               <div
                 key={formation.number}
-                className="grid gap-4 border-t border-white/20 py-7 md:grid-cols-[70px_1fr]"
+                className="grid gap-4 border-t border-white/25 py-7 md:grid-cols-[70px_1fr]"
               >
                 <span className="text-sm text-white/40">
                   {formation.number}
@@ -72,7 +72,7 @@ export function TrainingPreview() {
                     {formation.title}
                   </h3>
 
-                  <p className="mt-3 max-w-xl leading-7 text-white/60">
+                  <p className="mt-3 max-w-xl leading-7 text-white/70">
                     {formation.text}
                   </p>
                 </div>
