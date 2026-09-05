@@ -1,19 +1,25 @@
-import { Container } from "@/components/ui/Container";
-import { Section } from "@/components/ui/Section";
+import type { Metadata } from "next";
+
+import { FormationList } from "@/components/sections/formations/FormationList";
+import { FormationsCTA } from "@/components/sections/formations/FormationsCTA";
+import { FormationsHero } from "@/components/sections/formations/FormationsHero";
+import { FormationsIntro } from "@/components/sections/formations/FormationsIntro";
+import { FundingSection } from "@/components/sections/formations/FundingSection";
+
+export const metadata: Metadata = {
+  title: "Formations Ayurveda",
+  description:
+    "Découvrez les formations Uttara en Ayurveda, massage Abhyanga, Bol Kansu et découverte de l’Ayurveda. Organisme certifié Qualiopi.",
+};
 
 export default function FormationsPage() {
   return (
-    <Section>
-      <Container>
-        <h1 className="text-5xl font-medium">
-          Formations
-        </h1>
-
-        <p className="mt-6 max-w-2xl text-lg text-black/65">
-          Découvrez prochainement les formations
-          proposées par Uttara.
-        </p>
-      </Container>
-    </Section>
+    <>
+      <FormationsHero />
+      <FormationsIntro />
+      <FormationList />
+      <FundingSection />
+      <FormationsCTA />
+    </>
   );
 }

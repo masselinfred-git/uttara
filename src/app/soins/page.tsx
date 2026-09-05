@@ -1,19 +1,27 @@
-import { Container } from "@/components/ui/Container";
-import { Section } from "@/components/ui/Section";
+import type { Metadata } from "next";
+
+import { CareList } from "@/components/sections/soins/CareList";
+import { MedicalNotice } from "@/components/sections/soins/MedicalNotice";
+import { SoinsCTA } from "@/components/sections/soins/SoinsCTA";
+import { SoinsHero } from "@/components/sections/soins/SoinsHero";
+import { SoinsIntro } from "@/components/sections/soins/SoinsIntro";
+import { WhoForSection } from "@/components/sections/soins/WhoForSection";
+
+export const metadata: Metadata = {
+  title: "Soins ayurvédiques",
+  description:
+    "Découvrez les soins ayurvédiques proposés par Uttara : bilan ayurvédique, massages, bol Kansu et accompagnements de bien-être.",
+};
 
 export default function SoinsPage() {
   return (
-    <Section>
-      <Container>
-        <h1 className="text-5xl font-medium">
-          Soins
-        </h1>
-
-        <p className="mt-6 max-w-2xl text-lg text-black/65">
-          Cette page présentera prochainement
-          les soins proposés par Uttara.
-        </p>
-      </Container>
-    </Section>
+    <>
+      <SoinsHero />
+      <SoinsIntro />
+      <CareList />
+      <WhoForSection />
+      <MedicalNotice />
+      <SoinsCTA />
+    </>
   );
 }
