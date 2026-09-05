@@ -1,41 +1,33 @@
-import { Container } from "@/components/ui/Container";
-import { Section } from "@/components/ui/Section";
+import { AboutSection } from "@/components/sections/AboutSection";
+import { CareSection } from "@/components/sections/CareSection";
+import { HeroVideo } from "@/components/sections/HeroVideo";
+import { ImmersiveBreak } from "@/components/sections/ImmersiveBreak";
+import { IntroSection } from "@/components/sections/IntroSection";
+import { SchedulePreview } from "@/components/sections/SchedulePreview";
+import { ShopTeaser } from "@/components/sections/ShopTeaser";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { TrainingPreview } from "@/components/sections/TrainingPreview";
 
 export default function HomePage() {
   return (
     <>
-      <Section className="min-h-[65vh]">
-        <Container>
-          <div className="max-w-4xl">
-            <p className="mb-6 text-sm uppercase tracking-[0.2em] text-black/50">
-              Ayurveda · Soins · Formations
-            </p>
+      <HeroVideo />
 
-            <h1 className="text-5xl leading-tight font-medium md:text-7xl">
-              Un lieu pour prendre soin,
-              transmettre et se reconnecter.
-            </h1>
+      <IntroSection />
 
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-black/65">
-              Uttara est un espace dédié à l’Ayurveda,
-              aux soins, à l’énergie et à la transmission.
-            </p>
-          </div>
-        </Container>
-      </Section>
+      <CareSection />
 
-      <Section className="bg-[var(--surface)]">
-        <Container>
-          <p className="text-sm uppercase tracking-[0.2em] text-black/50">
-            Site en construction
-          </p>
+      <ImmersiveBreak />
 
-          <h2 className="mt-4 max-w-3xl text-3xl leading-tight md:text-5xl">
-            Nous construisons actuellement le nouvel univers
-            d’Uttara.
-          </h2>
-        </Container>
-      </Section>
+      <TrainingPreview />
+
+      <SchedulePreview />
+
+      <Testimonials />
+
+      <AboutSection />
+
+      <ShopTeaser />
     </>
   );
 }
