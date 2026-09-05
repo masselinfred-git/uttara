@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { siteConfig } from "@/config/site";
 
 export function ContactSocials() {
   return (
@@ -21,24 +22,36 @@ export function ContactSocials() {
 
           <div className="mt-9 flex flex-wrap justify-center gap-4">
             <a
-              href="#"
+              href={siteConfig.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
               className="
-                rounded-full border border-white/40
-                px-7 py-3.5 text-sm
-                transition
-                hover:bg-white hover:text-[var(--forest-dark)]
+                rounded-full
+                border border-white/40
+                px-7 py-3.5
+                text-sm
+                transition-all duration-300
+                hover:-translate-y-0.5
+                hover:bg-white
+                hover:text-[var(--forest-dark)]
               "
             >
               Instagram ↗
             </a>
 
             <a
-              href="#"
+              href={siteConfig.social.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
               className="
-                rounded-full border border-white/40
-                px-7 py-3.5 text-sm
-                transition
-                hover:bg-white hover:text-[var(--forest-dark)]
+                rounded-full
+                border border-white/40
+                px-7 py-3.5
+                text-sm
+                transition-all duration-300
+                hover:-translate-y-0.5
+                hover:bg-white
+                hover:text-[var(--forest-dark)]
               "
             >
               Facebook ↗

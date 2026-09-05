@@ -11,7 +11,7 @@ export const siteConfig = {
   shopUrl: "https://boutique.passion-ayurveda.fr",
 
   social: {
-    instagram: "",
-    facebook: "",
+    instagram: "https://www.instagram.com/passion.ayurveda/",
+    facebook: "https://fr-fr.facebook.com/laetitia.bertrand.925",
   },
 } as const;

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { DeveloperEmailButton } from "@/components/ui/DeveloperEmailButton";
 import { Container } from "@/components/ui/Container";
 import { legalConfig } from "@/config/legal";
 
@@ -55,15 +56,6 @@ export default function MentionsLegalesPage() {
                 >
                   {legalConfig.phone}
                 </a>
-                <br />
-
-                E-mail :{" "}
-                <a
-                  href={`mailto:${legalConfig.email}`}
-                  className="underline underline-offset-4"
-                >
-                  {legalConfig.email}
-                </a>
               </p>
 
               <p className="mt-4">
@@ -75,8 +67,7 @@ export default function MentionsLegalesPage() {
 
             <LegalSection title="Organisme de formation">
               <p>
-                Numéro de déclaration d’activité :
-                {" "}
+                Numéro de déclaration d’activité :{" "}
                 <strong>
                   {legalConfig.trainingRegistrationNumber}
                 </strong>
@@ -89,12 +80,27 @@ export default function MentionsLegalesPage() {
 
             <LegalSection title="Directrice de la publication">
               <p>
-                La directrice de la publication est :
-                {" "}
+                La directrice de la publication est :{" "}
                 <strong>
                   {legalConfig.publicationDirector}
                 </strong>.
               </p>
+            </LegalSection>
+
+            <LegalSection title="Conception et développement du site">
+              <p>
+                Conception, développement et intégration du site :
+              </p>
+
+              <p className="mt-4">
+                <strong>Frédéric Masselin</strong>
+                <br />
+                Développement web & solutions numériques
+              </p>
+
+              <div className="mt-4">
+                <DeveloperEmailButton />
+              </div>
             </LegalSection>
 
             <LegalSection title="Hébergement">

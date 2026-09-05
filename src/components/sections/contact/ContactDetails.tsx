@@ -1,4 +1,5 @@
 import { legalConfig } from "@/config/legal";
+import { EmailButton } from "@/components/ui/EmailButton";
 
 export function ContactDetails() {
   return (
@@ -38,16 +39,11 @@ export function ContactDetails() {
         </div>
 
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-white/45">
-            E-mail
-          </p>
+            <p className="text-xs uppercase tracking-[0.2em] text-white/45">
+                E-mail
+            </p>
 
-          <a
-            href={`mailto:${legalConfig.email}`}
-            className="mt-2 block break-all text-lg text-white/85 transition hover:text-white"
-          >
-            {legalConfig.email}
-          </a>
+            <EmailButton />
         </div>
 
         <div>
