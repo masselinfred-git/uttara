@@ -19,6 +19,9 @@ export function Button({
     light:
       "bg-[var(--background-light)] text-[var(--forest-dark)] hover:bg-white",
 
+    outline:
+      "border border-white/70 bg-transparent text-white hover:bg-white hover:text-[var(--forest-dark)]",
+
     outlineDark:
       "border border-[var(--forest)] bg-transparent text-[var(--forest)] hover:bg-[var(--forest)] hover:text-[var(--background-light)]",
   };
