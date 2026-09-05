@@ -9,6 +9,7 @@ type FormState = {
   subject: string;
   message: string;
   privacy: boolean;
+  website: string;
 };
 
 const initialState: FormState = {
@@ -18,18 +19,59 @@ const initialState: FormState = {
   subject: "",
   message: "",
   privacy: false,
+  website: "",
 };
 
 export function ContactForm() {
   const [form, setForm] = useState<FormState>(initialState);
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(
+    event: React.FormEvent<HTMLFormElement>,
+  ) {
     event.preventDefault();
 
-    // Pour l'instant : UI uniquement.
-    // Nous brancherons l'envoi réel ensuite.
-    setSubmitted(true);
+    setStatus("sending");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          subject: form.subject,
+          message: form.message,
+          website: form.website,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.error || "Une erreur est survenue.",
+        );
+      }
+
+      setForm(initialState);
+      setStatus("success");
+    } catch (error) {
+      setStatus("error");
+
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Une erreur est survenue.",
+      );
+    }
   }
 
   const fieldClass =
@@ -50,23 +92,52 @@ export function ContactForm() {
         laissez-moi un message. Je vous répondrai dès que possible.
       </p>
 
-      {submitted ? (
+      {status === "success" ? (
         <div className="mt-10 rounded-[2rem] bg-[var(--surface)] p-8">
           <p className="font-script text-3xl text-[var(--earth)]">
             Merci
           </p>
 
           <h3 className="mt-2 text-3xl">
-            Votre formulaire est prêt.
+            Votre message a bien été envoyé.
           </h3>
 
           <p className="mt-4 leading-7 text-[var(--muted)]">
-            L’envoi réel sera activé lorsque nous aurons branché
-            le service de messagerie.
+            Laëtitia vous répondra dès que possible.
           </p>
+
+          <button
+            type="button"
+            onClick={() => setStatus("idle")}
+            className="mt-6 text-sm underline underline-offset-4"
+          >
+            Envoyer un autre message
+          </button>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="mt-10 space-y-6">
+          {/* HONEYPOT */}
+          <div
+            aria-hidden="true"
+            className="absolute -left-[9999px] h-px w-px overflow-hidden"
+          >
+            <label>
+              Site internet
+              <input
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={form.website}
+                onChange={(event) =>
+                  setForm({
+                    ...form,
+                    website: event.target.value,
+                  })
+                }
+              />
+            </label>
+          </div>
+
           <div className="grid gap-6 md:grid-cols-2">
             <label className="text-sm">
               Nom et prénom *
@@ -76,7 +147,10 @@ export function ContactForm() {
                 autoComplete="name"
                 value={form.name}
                 onChange={(event) =>
-                  setForm({ ...form, name: event.target.value })
+                  setForm({
+                    ...form,
+                    name: event.target.value,
+                  })
                 }
                 className={fieldClass}
               />
@@ -90,7 +164,10 @@ export function ContactForm() {
                 autoComplete="email"
                 value={form.email}
                 onChange={(event) =>
-                  setForm({ ...form, email: event.target.value })
+                  setForm({
+                    ...form,
+                    email: event.target.value,
+                  })
                 }
                 className={fieldClass}
               />
@@ -105,7 +182,10 @@ export function ContactForm() {
                 autoComplete="tel"
                 value={form.phone}
                 onChange={(event) =>
-                  setForm({ ...form, phone: event.target.value })
+                  setForm({
+                    ...form,
+                    phone: event.target.value,
+                  })
                 }
                 className={fieldClass}
               />
@@ -117,7 +197,10 @@ export function ContactForm() {
                 required
                 value={form.subject}
                 onChange={(event) =>
-                  setForm({ ...form, subject: event.target.value })
+                  setForm({
+                    ...form,
+                    subject: event.target.value,
+                  })
                 }
                 className={fieldClass}
               >
@@ -148,10 +231,15 @@ export function ContactForm() {
             Votre message *
             <textarea
               required
+              minLength={10}
+              maxLength={5000}
               rows={7}
               value={form.message}
               onChange={(event) =>
-                setForm({ ...form, message: event.target.value })
+                setForm({
+                  ...form,
+                  message: event.target.value,
+                })
               }
               className={`${fieldClass} resize-y`}
             />
@@ -163,7 +251,10 @@ export function ContactForm() {
               required
               checked={form.privacy}
               onChange={(event) =>
-                setForm({ ...form, privacy: event.target.checked })
+                setForm({
+                  ...form,
+                  privacy: event.target.checked,
+                })
               }
               className="mt-1 h-4 w-4 accent-[var(--forest)]"
             />
@@ -182,14 +273,15 @@ export function ContactForm() {
             </span>
           </label>
 
-          <p className="text-xs leading-5 text-[var(--muted)]">
-            Les champs marqués d’un astérisque sont obligatoires.
-            Les informations transmises sont utilisées uniquement
-            pour répondre à votre demande.
-          </p>
+          {status === "error" && (
+            <div className="rounded-2xl border border-red-300 bg-red-50 px-5 py-4 text-sm text-red-800">
+              {errorMessage}
+            </div>
+          )}
 
           <button
             type="submit"
+            disabled={status === "sending"}
             className="
               inline-flex min-h-12 items-center justify-center
               rounded-full
@@ -200,9 +292,13 @@ export function ContactForm() {
               transition-all duration-300
               hover:-translate-y-0.5
               hover:bg-[var(--forest-dark)]
+              disabled:cursor-not-allowed
+              disabled:opacity-50
             "
           >
-            Envoyer mon message
+            {status === "sending"
+              ? "Envoi en cours..."
+              : "Envoyer mon message"}
           </button>
         </form>
       )}

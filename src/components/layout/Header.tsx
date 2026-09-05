@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { MobileMenu } from "@/components/layout/MobileMenu";
 import { Container } from "@/components/ui/Container";
 import { navigation } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
@@ -12,14 +13,21 @@ export function Header() {
         <Link
           href="/"
           aria-label="Uttara - Accueil"
-          className="relative block h-[76px] w-[250px] shrink-0 sm:w-[280px]"
+          className="
+            relative block
+            h-[72px]
+            w-[220px]
+            shrink-0
+            sm:w-[260px]
+            lg:w-[280px]
+          "
         >
           <Image
             src="/images/brand/uttara-logo-horizontal.png"
             alt="Uttara - Ayurveda, Soins, Formations"
             fill
             priority
-            sizes="(max-width: 640px) 250px, 280px"
+            sizes="(max-width: 640px) 220px, (max-width: 1024px) 260px, 280px"
             className="object-contain object-left"
           />
         </Link>
@@ -68,24 +76,7 @@ export function Header() {
           </ul>
         </nav>
 
-        <Link
-          href="/contact"
-          className="
-            inline-flex
-            rounded-full
-            border border-[var(--forest)]
-            px-5 py-2.5
-            text-sm
-            text-[var(--forest)]
-            transition-all
-            duration-300
-            hover:bg-[var(--forest)]
-            hover:text-[var(--background-light)]
-            md:hidden
-          "
-        >
-          Contact
-        </Link>
+        <MobileMenu />
       </Container>
     </header>
   );

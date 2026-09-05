@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Container";
 
 export function HeroVideo() {
   return (
-    <section className="relative min-h-[88svh] overflow-hidden">
+    <section className="relative min-h-[82svh] overflow-hidden sm:min-h-[86svh] lg:min-h-[88svh]">
       {/* VIDEO */}
       <div className="absolute inset-0">
         <video
@@ -13,7 +13,7 @@ export function HeroVideo() {
           playsInline
           preload="metadata"
           poster="/images/home/hero-poster.webp"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover object-center"
         >
           <source
             src="/videos/hero/uttara-hero.webm"
@@ -27,19 +27,19 @@ export function HeroVideo() {
         </video>
       </div>
 
-      {/* Overlay chaud */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-black/5" />
+      {/* OVERLAYS */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/35 to-black/10 sm:from-black/60 sm:via-black/30 sm:to-black/5" />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
 
       {/* CONTENU */}
-      <Container className="relative z-10 flex min-h-[88svh] items-center py-16 md:py-20">
-        <div className="max-w-3xl pt-24 text-[#f4ede3]">
-          <p className="mb-5 text-xs font-medium uppercase tracking-[0.3em] md:text-sm">
+      <Container className="relative z-10 flex min-h-[82svh] items-center py-12 sm:min-h-[86svh] sm:py-16 lg:min-h-[88svh] lg:py-20">
+        <div className="max-w-3xl pt-6 text-[#f4ede3] sm:pt-10 lg:pt-16">
+          <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.26em] sm:mb-5 sm:text-xs sm:tracking-[0.3em] md:text-sm">
             Ayurveda · Soins · Formations
           </p>
 
-          <h1 className="text-5xl leading-[0.95] font-medium sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="text-[2.8rem] leading-[0.98] font-medium sm:text-6xl md:text-7xl lg:text-8xl">
             Revenir à soi.
             <br />
             Se reconnecter
@@ -49,12 +49,12 @@ export function HeroVideo() {
             </span>
           </h1>
 
-          <p className="mt-8 max-w-xl text-base leading-7 text-white/90 md:text-lg">
+          <p className="mt-6 max-w-xl text-sm leading-7 text-white/90 sm:mt-8 sm:text-base md:text-lg">
             Un espace chaleureux où l’Ayurveda,
             le soin et l’énergie se rencontrent.
           </p>
 
-          <div className="mt-9 flex flex-wrap gap-4">
+          <div className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:gap-4">
             <Button href="/soins" variant="light">
               Découvrir les soins
             </Button>
@@ -66,8 +66,8 @@ export function HeroVideo() {
         </div>
       </Container>
 
-      {/* indication scroll */}
-      <div className="absolute bottom-7 left-1/2 z-10 -translate-x-1/2 text-center text-white/70">
+      {/* INDICATION SCROLL */}
+      <div className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 text-center text-white/70 sm:block">
         <span className="text-[10px] uppercase tracking-[0.3em]">
           Découvrir
         </span>
