@@ -8,7 +8,6 @@ import {
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { StructuredData } from "@/components/seo/StructuredData";
-import { siteConfig } from "@/config/site";
 
 import "./globals.css";
 
