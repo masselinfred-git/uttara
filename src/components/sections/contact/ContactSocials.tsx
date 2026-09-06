@@ -1,8 +1,12 @@
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { siteConfig } from "@/config/site";
+import type { PublicSiteCoordinates } from "@/services/cms/types";
 
-export function ContactSocials() {
+export function ContactSocials({
+  coordinates,
+}: {
+  coordinates: PublicSiteCoordinates;
+}) {
   return (
     <Section className="bg-[var(--forest)] text-[var(--background-light)]">
       <Container>
@@ -22,7 +26,7 @@ export function ContactSocials() {
 
           <div className="mt-7 flex flex-col justify-center gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:gap-4">
             <a
-              href={siteConfig.social.instagram}
+              href={coordinates.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="
@@ -42,7 +46,7 @@ export function ContactSocials() {
             </a>
 
             <a
-              href={siteConfig.social.facebook}
+              href={coordinates.facebook}
               target="_blank"
               rel="noopener noreferrer"
               className="

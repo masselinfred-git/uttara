@@ -4,9 +4,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { navigation } from "@/config/navigation";
-import { siteConfig } from "@/config/site";
+import type { PublicSiteCoordinates } from "@/services/cms/types";
 
-export function MobileMenu() {
+export function MobileMenu({
+  coordinates,
+}: {
+  coordinates: PublicSiteCoordinates;
+}) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -90,7 +94,7 @@ export function MobileMenu() {
 
                   <li>
                     <a
-                      href={siteConfig.shopUrl}
+                      href={coordinates.shopUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={closeMenu}
@@ -115,7 +119,7 @@ export function MobileMenu() {
 
                 <div className="mt-4 flex gap-6 text-sm">
                   <a
-                    href={siteConfig.social.instagram}
+                    href={coordinates.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -123,7 +127,7 @@ export function MobileMenu() {
                   </a>
 
                   <a
-                    href={siteConfig.social.facebook}
+                    href={coordinates.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -132,9 +136,9 @@ export function MobileMenu() {
                 </div>
 
                 <p className="mt-7 text-sm leading-6 text-[var(--muted)]">
-                  12 rue du Presbytère
+                  {coordinates.address}
                   <br />
-                  05300 Le Poët
+                  {coordinates.postalCode} {coordinates.city}
                 </p>
               </div>
             </div>

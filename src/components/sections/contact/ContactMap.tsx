@@ -2,11 +2,17 @@ import Image from "next/image";
 
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import type { PublicSiteCoordinates } from "@/services/cms/types";
 
-const googleMapsUrl =
-  "https://www.google.com/maps/search/?api=1&query=12+rue+du+Presbytère+05300+Le+Poët";
+export function ContactMap({
+  coordinates,
+}: {
+  coordinates: PublicSiteCoordinates;
+}) {
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${coordinates.address} ${coordinates.postalCode} ${coordinates.city}`,
+  )}`;
 
-export function ContactMap() {
   return (
     <Section className="bg-[var(--surface)]">
       <Container>
@@ -32,9 +38,9 @@ export function ContactMap() {
               </p>
 
               <p className="mt-2 text-base leading-7 sm:text-lg">
-                12 rue du Presbytère
+                {coordinates.address}
                 <br />
-                05300 Le Poët
+                {coordinates.postalCode} {coordinates.city}
               </p>
             </div>
 

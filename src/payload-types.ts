@@ -69,7 +69,9 @@ export interface Config {
   collections: {
     soins: Soin;
     formations: Formation;
+    temoignages: Temoignage;
     media: Media;
+    documents: Document;
     users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -80,7 +82,9 @@ export interface Config {
   collectionsSelect: {
     soins: SoinsSelect<false> | SoinsSelect<true>;
     formations: FormationsSelect<false> | FormationsSelect<true>;
+    temoignages: TemoignagesSelect<false> | TemoignagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    documents: DocumentsSelect<false> | DocumentsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -91,8 +95,16 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    accueil: Accueil;
+    'a-propos': APropo;
+    'coordonnees-site': CoordonneesSite;
+  };
+  globalsSelect: {
+    accueil: AccueilSelect<false> | AccueilSelect<true>;
+    'a-propos': AProposSelect<false> | AProposSelect<true>;
+    'coordonnees-site': CoordonneesSiteSelect<false> | CoordonneesSiteSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -265,6 +277,71 @@ export interface Formation {
    * Exemple : Hébergement sur place possible : 50 € / nuit
    */
   accommodation?: string | null;
+  /**
+   * Seuls les documents actifs sont proposés dans cette liste.
+   */
+  documents?: (number | Document)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Bibliothèque des documents téléchargeables proposés sur le site.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents".
+ */
+export interface Document {
+  id: number;
+  /**
+   * Seuls les documents cochés peuvent être proposés publiquement.
+   */
+  active?: boolean | null;
+  /**
+   * Les plus petits nombres apparaissent en premier.
+   */
+  order?: number | null;
+  title: string;
+  description?: string | null;
+  category: 'formation' | 'soin' | 'accueil' | 'contact' | 'autre';
+  /**
+   * Facultatif, par exemple : 2026 ou v2.
+   */
+  version?: string | null;
+  /**
+   * Facultatif.
+   */
+  documentDate?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * Gérez les témoignages affichés sur la page d’accueil.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "temoignages".
+ */
+export interface Temoignage {
+  id: number;
+  active?: boolean | null;
+  /**
+   * Les plus petits nombres apparaissent en premier.
+   */
+  order?: number | null;
+  name: string;
+  text: string;
+  /**
+   * Facultatif, par exemple : soin ou formation.
+   */
+  context?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -332,8 +409,16 @@ export interface PayloadLockedDocument {
         value: number | Formation;
       } | null)
     | ({
+        relationTo: 'temoignages';
+        value: number | Temoignage;
+      } | null)
+    | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'documents';
+        value: number | Document;
       } | null)
     | ({
         relationTo: 'users';
@@ -426,6 +511,20 @@ export interface FormationsSelect<T extends boolean = true> {
   individual?: T;
   maxParticipants?: T;
   accommodation?: T;
+  documents?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "temoignages_select".
+ */
+export interface TemoignagesSelect<T extends boolean = true> {
+  active?: T;
+  order?: T;
+  name?: T;
+  text?: T;
+  context?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -435,6 +534,30 @@ export interface FormationsSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents_select".
+ */
+export interface DocumentsSelect<T extends boolean = true> {
+  active?: T;
+  order?: T;
+  title?: T;
+  description?: T;
+  category?: T;
+  version?: T;
+  documentDate?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -509,6 +632,169 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Modifiez les textes de l’accueil sans changer sa mise en page.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accueil".
+ */
+export interface Accueil {
+  id: number;
+  heroEyebrow?: string | null;
+  heroTitleLine1?: string | null;
+  heroTitleLine2?: string | null;
+  heroTitleAccent?: string | null;
+  heroText?: string | null;
+  introEyebrow?: string | null;
+  introTitle?: string | null;
+  introText?: string | null;
+  careEyebrow?: string | null;
+  careLabel?: string | null;
+  careTitle?: string | null;
+  careText?: string | null;
+  immersiveLine1?: string | null;
+  immersiveLine2?: string | null;
+  immersiveAccent?: string | null;
+  trainingEyebrow?: string | null;
+  trainingLabel?: string | null;
+  trainingTitle?: string | null;
+  trainingText?: string | null;
+  trainingItems?:
+    | {
+        number: string;
+        title: string;
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  scheduleEyebrow?: string | null;
+  scheduleTitle?: string | null;
+  scheduleText?: string | null;
+  shopEyebrow?: string | null;
+  shopTitle?: string | null;
+  shopText?: string | null;
+  shopButtonLabel?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Présentation de Laëtitia affichée sur la page d’accueil.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "a-propos".
+ */
+export interface APropo {
+  id: number;
+  displayName?: string | null;
+  role?: string | null;
+  primaryText?: string | null;
+  secondaryText?: string | null;
+  /**
+   * Sélectionnez une photo existante ou importez-en une nouvelle.
+   */
+  photo?: (number | null) | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Coordonnées publiques, réseaux sociaux et informations pratiques.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "coordonnees-site".
+ */
+export interface CoordonneesSite {
+  id: number;
+  businessName?: string | null;
+  address?: string | null;
+  postalCode?: string | null;
+  city?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  instagram?: string | null;
+  facebook?: string | null;
+  shopUrl?: string | null;
+  appointmentText?: string | null;
+  fundingText?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accueil_select".
+ */
+export interface AccueilSelect<T extends boolean = true> {
+  heroEyebrow?: T;
+  heroTitleLine1?: T;
+  heroTitleLine2?: T;
+  heroTitleAccent?: T;
+  heroText?: T;
+  introEyebrow?: T;
+  introTitle?: T;
+  introText?: T;
+  careEyebrow?: T;
+  careLabel?: T;
+  careTitle?: T;
+  careText?: T;
+  immersiveLine1?: T;
+  immersiveLine2?: T;
+  immersiveAccent?: T;
+  trainingEyebrow?: T;
+  trainingLabel?: T;
+  trainingTitle?: T;
+  trainingText?: T;
+  trainingItems?:
+    | T
+    | {
+        number?: T;
+        title?: T;
+        text?: T;
+        id?: T;
+      };
+  scheduleEyebrow?: T;
+  scheduleTitle?: T;
+  scheduleText?: T;
+  shopEyebrow?: T;
+  shopTitle?: T;
+  shopText?: T;
+  shopButtonLabel?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "a-propos_select".
+ */
+export interface AProposSelect<T extends boolean = true> {
+  displayName?: T;
+  role?: T;
+  primaryText?: T;
+  secondaryText?: T;
+  photo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "coordonnees-site_select".
+ */
+export interface CoordonneesSiteSelect<T extends boolean = true> {
+  businessName?: T;
+  address?: T;
+  postalCode?: T;
+  city?: T;
+  phone?: T;
+  email?: T;
+  instagram?: T;
+  facebook?: T;
+  shopUrl?: T;
+  appointmentText?: T;
+  fundingText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

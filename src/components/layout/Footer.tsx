@@ -1,9 +1,13 @@
 import Link from "next/link";
 
 import { Container } from "@/components/ui/Container";
-import { siteConfig } from "@/config/site";
+import type { PublicSiteCoordinates } from "@/services/cms/types";
 
-export function Footer() {
+export function Footer({
+  coordinates,
+}: {
+  coordinates: PublicSiteCoordinates;
+}) {
   return (
     <footer className="border-t border-black/10 bg-[var(--background-light)]">
       <Container className="py-12 md:py-16">
@@ -12,7 +16,7 @@ export function Footer() {
           <div>
             <Link href="/" className="inline-block">
               <p className="text-lg font-semibold uppercase tracking-[0.18em]">
-                Uttara
+                {coordinates.businessName}
               </p>
 
               <p className="mt-2 text-sm tracking-[0.08em] text-[var(--muted)]">
@@ -26,9 +30,9 @@ export function Footer() {
             </p>
 
             <p className="mt-5 text-sm leading-6 text-[var(--muted)]">
-              12 rue du Presbytère
+              {coordinates.address}
               <br />
-              05300 Le Poët
+              {coordinates.postalCode} {coordinates.city}
             </p>
           </div>
 
@@ -71,7 +75,7 @@ export function Footer() {
               </Link>
 
               <a
-                href={siteConfig.shopUrl}
+                href={coordinates.shopUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-opacity hover:opacity-60"
@@ -89,7 +93,7 @@ export function Footer() {
 
             <div className="mt-5 flex flex-col items-start gap-3 text-sm">
               <a
-                href={siteConfig.social.instagram}
+                href={coordinates.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-opacity hover:opacity-60"
@@ -98,7 +102,7 @@ export function Footer() {
               </a>
 
               <a
-                href={siteConfig.social.facebook}
+                href={coordinates.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-opacity hover:opacity-60"

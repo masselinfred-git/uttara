@@ -216,5 +216,32 @@ export const Formations: CollectionConfig = {
         },
       ],
     },
+    {
+      type: "collapsible",
+      label: "Documents à télécharger",
+      admin: {
+        initCollapsed: false,
+        description:
+          "Associez les programmes et documents proposés avec cette formation.",
+      },
+      fields: [
+        {
+          name: "documents",
+          label: "Documents associés",
+          type: "relationship",
+          relationTo: "documents",
+          hasMany: true,
+          filterOptions: {
+            active: {
+              equals: true,
+            },
+          },
+          admin: {
+            description:
+              "Seuls les documents actifs sont proposés dans cette liste.",
+          },
+        },
+      ],
+    },
   ],
 };

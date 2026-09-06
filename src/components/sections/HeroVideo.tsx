@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import type { PublicHomeContent } from "@/services/cms/types";
 
-export function HeroVideo() {
+export function HeroVideo({
+  content,
+}: {
+  content: PublicHomeContent["hero"];
+}) {
   return (
     <section className="relative min-h-[82svh] overflow-hidden sm:min-h-[86svh] lg:min-h-[88svh]">
       {/* VIDEO */}
@@ -31,22 +36,21 @@ export function HeroVideo() {
       <Container className="relative z-10 flex min-h-[82svh] items-center py-12 sm:min-h-[86svh] sm:py-16 lg:min-h-[88svh] lg:py-20">
         <div className="max-w-3xl pt-6 text-[#f4ede3] sm:pt-10 lg:pt-16">
           <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.26em] sm:mb-5 sm:text-xs sm:tracking-[0.3em] md:text-sm">
-            Ayurveda · Soins · Formations
+            {content.eyebrow}
           </p>
 
           <h1 className="text-[2.8rem] leading-[0.98] font-medium sm:text-6xl md:text-7xl lg:text-8xl">
-            Revenir à soi.
+            {content.titleLine1}
             <br />
-            Se reconnecter
+            {content.titleLine2}
             <br />
             <span className="font-script font-normal">
-              à l’essentiel.
+              {content.titleAccent}
             </span>
           </h1>
 
           <p className="mt-6 max-w-xl text-sm leading-7 text-white/90 sm:mt-8 sm:text-base md:text-lg">
-            Un espace chaleureux où l’Ayurveda,
-            le soin et l’énergie se rencontrent.
+            {content.text}
           </p>
 
           <div className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:gap-4">

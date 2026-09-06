@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import type { PublicHomeContent } from "@/services/cms/types";
 
 const dates = [
   {
@@ -19,24 +20,27 @@ const dates = [
   },
 ];
 
-export function SchedulePreview() {
+export function SchedulePreview({
+  content,
+}: {
+  content: PublicHomeContent["schedule"];
+}) {
   return (
     <Section className="bg-[var(--background-light)]">
       <Container>
         <div className="mb-12 md:flex md:items-end md:justify-between">
           <div>
             <p className="font-script text-4xl text-[var(--earth)]">
-              Se rencontrer
+              {content.eyebrow}
             </p>
 
             <h2 className="mt-3 text-4xl md:text-6xl">
-              Prochaines dates
+              {content.title}
             </h2>
           </div>
 
           <p className="mt-6 max-w-md text-[var(--muted)] md:mt-0">
-            Retrouvez ici les prochaines sessions
-            de formation proposées par Uttara.
+            {content.text}
           </p>
         </div>
 

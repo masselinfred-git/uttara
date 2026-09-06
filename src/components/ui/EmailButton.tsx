@@ -1,11 +1,8 @@
 "use client";
 
-export function EmailButton() {
+export function EmailButton({ email }: { email: string }) {
   function handleClick() {
-    const user = "contact";
-    const domain = "passion-ayurveda.fr";
-
-    window.location.href = `mailto:${user}@${domain}`;
+    window.location.href = `mailto:${email}`;
   }
 
   return (

@@ -4,8 +4,11 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { StructuredData } from "@/components/seo/StructuredData"; 
 import { siteFontVariables } from "@/app/site-fonts";
+import { getSiteCoordinates } from "@/services/cms/getSiteCoordinates";
 
 import "../globals.css";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.passion-ayurveda.fr"),
@@ -83,11 +86,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const coordinates = await getSiteCoordinates();
+
   return (
     <html lang="fr">
       <body
@@ -95,13 +100,13 @@ export default function RootLayout({
       >
         <StructuredData />
         <div className="flex min-h-screen flex-col">
-          <Header />
+          <Header coordinates={coordinates} />
 
           <main className="flex-1">
             {children}
           </main>
 
-          <Footer />
+          <Footer coordinates={coordinates} />
         </div>
       </body>
     </html>

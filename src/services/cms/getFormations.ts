@@ -2,6 +2,7 @@ import { getPayload } from "payload";
 
 import config from "@payload-config";
 import { formations as fallbackFormations } from "@/config/formations";
+import { mapPayloadDocument } from "@/services/cms/getDocuments";
 import type { PublicFormation } from "@/services/cms/types";
 
 const normalizedFallbackFormations: PublicFormation[] =
@@ -18,6 +19,7 @@ const normalizedFallbackFormations: PublicFormation[] =
     individual: formation.individual,
     maxParticipants: formation.maxParticipants,
     accommodation: formation.accommodation,
+    documents: [],
     order: index,
     active: true,
   }));
@@ -27,6 +29,7 @@ export async function getFormations(): Promise<PublicFormation[]> {
     const payload = await getPayload({ config });
     const result = await payload.find({
       collection: "formations",
+      depth: 1,
       limit: 1000,
       sort: "order",
       where: {
@@ -60,6 +63,11 @@ export async function getFormations(): Promise<PublicFormation[]> {
       individual: formation.individual === true,
       maxParticipants: formation.maxParticipants ?? undefined,
       accommodation: formation.accommodation ?? undefined,
+      documents: (formation.documents ?? []).flatMap((document) => {
+        if (typeof document === "number") return [];
+        const mapped = mapPayloadDocument(document);
+        return mapped ? [mapped] : [];
+      }),
       order: formation.order,
       active: formation.active,
     }));

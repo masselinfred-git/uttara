@@ -4,9 +4,13 @@ import Link from "next/link";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { Container } from "@/components/ui/Container";
 import { navigation } from "@/config/navigation";
-import { siteConfig } from "@/config/site";
+import type { PublicSiteCoordinates } from "@/services/cms/types";
 
-export function Header() {
+export function Header({
+  coordinates,
+}: {
+  coordinates: PublicSiteCoordinates;
+}) {
   return (
     <header className="border-b border-black/10 bg-[var(--background-light)]">
       <Container className="flex min-h-24 items-center justify-between gap-8">
@@ -55,7 +59,7 @@ export function Header() {
 
             <li>
               <a
-                href={siteConfig.shopUrl}
+                href={coordinates.shopUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
@@ -76,7 +80,7 @@ export function Header() {
           </ul>
         </nav>
 
-        <MobileMenu />
+        <MobileMenu coordinates={coordinates} />
       </Container>
     </header>
   );

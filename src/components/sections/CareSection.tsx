@@ -3,8 +3,13 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import type { PublicHomeContent } from "@/services/cms/types";
 
-export function CareSection() {
+export function CareSection({
+  content,
+}: {
+  content: PublicHomeContent["care"];
+}) {
   return (
     <Section>
       <Container>
@@ -21,23 +26,19 @@ export function CareSection() {
 
           <div>
             <p className="mb-3 font-script text-3xl text-[var(--earth)] sm:text-4xl">
-              Prendre soin
+              {content.eyebrow}
             </p>
 
             <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--muted)] sm:text-xs sm:tracking-[0.25em]">
-              Les soins
+              {content.label}
             </p>
 
             <h2 className="mt-4 text-3xl leading-tight sm:mt-5 sm:text-5xl md:text-6xl">
-              Écouter le corps,
-              accompagner l’énergie.
+              {content.title}
             </h2>
 
             <p className="mt-6 max-w-xl text-sm leading-7 text-[var(--muted)] sm:mt-7 sm:text-base sm:leading-8">
-              Les soins proposés par Uttara s’inscrivent
-              dans une approche globale inspirée de l’Ayurveda,
-              attentive au corps, aux sensations et à l’équilibre
-              propre à chacun.
+              {content.text}
             </p>
 
             <div className="mt-7 sm:mt-9">

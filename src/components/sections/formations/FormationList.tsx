@@ -136,6 +136,46 @@ export function FormationList({ formations }: FormationListProps) {
                     </div>
                   </div>
 
+                  {formation.documents.length > 0 && (
+                    <div className="mt-8 border-t border-[var(--border)] pt-7 sm:mt-9 sm:pt-8">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] sm:text-xs">
+                        Documents à télécharger
+                      </p>
+
+                      <div className="mt-4 flex flex-col gap-3">
+                        {formation.documents.map((document) => {
+                          const isPdf = document.fileType === "PDF";
+
+                          return (
+                            <a
+                              key={document.id}
+                              href={document.url}
+                              download={isPdf ? undefined : document.filename}
+                              target={isPdf ? "_blank" : undefined}
+                              rel={isPdf ? "noopener noreferrer" : undefined}
+                              className="flex items-center justify-between gap-4 rounded-2xl border border-[var(--border)] px-5 py-4 text-sm transition hover:border-[var(--forest)] sm:text-base"
+                            >
+                              <span>
+                                <span className="font-medium text-[var(--foreground)]">
+                                  {document.title}
+                                </span>
+                                {document.description && (
+                                  <span className="mt-1 block text-sm text-[var(--muted)]">
+                                    {document.description}
+                                  </span>
+                                )}
+                              </span>
+
+                              <span className="shrink-0 text-xs uppercase tracking-[0.14em] text-[var(--earth)]">
+                                {document.fileType}
+                              </span>
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
                   <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:gap-4">
                     <Button href="/contact">
                       Demander le programme

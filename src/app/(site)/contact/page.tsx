@@ -7,6 +7,9 @@ import { ContactMap } from "@/components/sections/contact/ContactMap";
 import { ContactSocials } from "@/components/sections/contact/ContactSocials";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { getSiteCoordinates } from "@/services/cms/getSiteCoordinates";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Contact et accès",
@@ -25,7 +28,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const coordinates = await getSiteCoordinates();
+
   return (
     <>
       <ContactHero />
@@ -34,14 +39,14 @@ export default function ContactPage() {
         <Container>
           <div className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
             <ContactForm />
-            <ContactDetails />
+            <ContactDetails coordinates={coordinates} />
           </div>
         </Container>
       </Section>
 
-      <ContactMap />
+      <ContactMap coordinates={coordinates} />
 
-      <ContactSocials />
+      <ContactSocials coordinates={coordinates} />
     </>
   );
 }

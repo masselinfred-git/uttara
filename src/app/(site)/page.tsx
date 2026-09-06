@@ -7,7 +7,13 @@ import { SchedulePreview } from "@/components/sections/SchedulePreview";
 import { ShopTeaser } from "@/components/sections/ShopTeaser";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { TrainingPreview } from "@/components/sections/TrainingPreview";
+import { getAboutContent } from "@/services/cms/getAboutContent";
+import { getHomeContent } from "@/services/cms/getHomeContent";
+import { getSiteCoordinates } from "@/services/cms/getSiteCoordinates";
+import { getTestimonials } from "@/services/cms/getTestimonials";
 import type { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Ayurveda, soins et formations dans les Hautes-Alpes",
@@ -26,26 +32,33 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [home, testimonials, about, coordinates] = await Promise.all([
+    getHomeContent(),
+    getTestimonials(),
+    getAboutContent(),
+    getSiteCoordinates(),
+  ]);
+
   return (
     <>
-      <HeroVideo />
+      <HeroVideo content={home.hero} />
 
-      <IntroSection />
+      <IntroSection content={home.intro} />
 
-      <CareSection />
+      <CareSection content={home.care} />
 
-      <ImmersiveBreak />
+      <ImmersiveBreak content={home.immersive} />
 
-      <TrainingPreview />
+      <TrainingPreview content={home.training} />
 
-      <SchedulePreview />
+      <SchedulePreview content={home.schedule} />
 
-      <Testimonials />
+      <Testimonials testimonials={testimonials} />
 
-      <AboutSection />
+      <AboutSection content={about} />
 
-      <ShopTeaser />
+      <ShopTeaser content={home.shop} shopUrl={coordinates.shopUrl} />
     </>
   );
 }
