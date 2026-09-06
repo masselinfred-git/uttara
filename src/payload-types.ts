@@ -67,10 +67,10 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    users: User;
-    media: Media;
     soins: Soin;
     formations: Formation;
+    media: Media;
+    users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,10 +78,10 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
     soins: SoinsSelect<false> | SoinsSelect<true>;
     formations: FormationsSelect<false> | FormationsSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -122,11 +122,163 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Gérez ici les soins affichés sur la page publique « Soins ».
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "soins".
+ */
+export interface Soin {
+  id: number;
+  /**
+   * Décochez cette case pour masquer temporairement ce soin.
+   */
+  active?: boolean | null;
+  /**
+   * Les plus petits nombres apparaissent en premier.
+   */
+  order?: number | null;
+  /**
+   * Le titre principal affiché sur le site.
+   */
+  title: string;
+  /**
+   * La courte phrase affichée juste au-dessus du titre.
+   */
+  eyebrow?: string | null;
+  /**
+   * Présentez le soin en quelques phrases simples.
+   */
+  description: string;
+  /**
+   * Informations facultatives affichées sous la description principale.
+   */
+  details?: string | null;
+  /**
+   * Sélectionnez une image existante ou importez-en une nouvelle. Sans image, le site conserve sa photo actuelle.
+   */
+  image?: (number | null) | Media;
+  /**
+   * Vous pouvez réordonner les lignes par glisser-déposer.
+   */
+  durations?:
+    | {
+        /**
+         * Exemple : 60 min
+         */
+        duration: string;
+        /**
+         * Exemple : 75 €
+         */
+        price: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Bibliothèque des images utilisées dans les soins et sur le site.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  /**
+   * Décrivez brièvement l’image pour les personnes qui ne peuvent pas la voir.
+   */
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * Gérez ici les formations affichées sur la page publique « Formations ».
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "formations".
+ */
+export interface Formation {
+  id: number;
+  /**
+   * Décochez cette case pour masquer temporairement cette formation.
+   */
+  active?: boolean | null;
+  /**
+   * Les plus petits nombres apparaissent en premier.
+   */
+  order?: number | null;
+  /**
+   * Le grand titre affiché dans la fiche.
+   */
+  title: string;
+  /**
+   * Affiché dans la colonne colorée. Si ce champ est vide, le nom complet sera utilisé.
+   */
+  shortTitle?: string | null;
+  /**
+   * La courte phrase affichée au-dessus du titre court.
+   */
+  eyebrow?: string | null;
+  /**
+   * Présentez le contenu et l’esprit de la formation.
+   */
+  description: string;
+  /**
+   * Exemple : 2 jours
+   */
+  duration?: string | null;
+  /**
+   * Exemple : 14 h
+   */
+  hours?: string | null;
+  /**
+   * Exemple : À partir de 450 € / personne
+   */
+  price?: string | null;
+  /**
+   * Les quatre premiers objectifs sont affichés sur la page publique.
+   */
+  objectives?:
+    | {
+        objective: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Cochez si la formation peut être suivie individuellement.
+   */
+  individual?: boolean | null;
+  /**
+   * Laissez vide si aucune limite ne doit être affichée.
+   */
+  maxParticipants?: number | null;
+  /**
+   * Exemple : Hébergement sur place possible : 50 € / nuit
+   */
+  accommodation?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Gestion des comptes autorisés à accéder à l’administration.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: number;
+  /**
+   * Nom affiché pour identifier facilement ce compte.
+   */
   name?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -146,75 +298,6 @@ export interface User {
     | null;
   password?: string | null;
   collection: 'users';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "soins".
- */
-export interface Soin {
-  id: number;
-  active?: boolean | null;
-  title: string;
-  eyebrow?: string | null;
-  description: string;
-  details?: string | null;
-  image?: (number | null) | Media;
-  durations?:
-    | {
-        duration: string;
-        price: string;
-        id?: string | null;
-      }[]
-    | null;
-  order?: number | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "formations".
- */
-export interface Formation {
-  id: number;
-  active?: boolean | null;
-  title: string;
-  shortTitle?: string | null;
-  eyebrow?: string | null;
-  description: string;
-  duration?: string | null;
-  hours?: string | null;
-  price?: string | null;
-  objectives?:
-    | {
-        objective: string;
-        id?: string | null;
-      }[]
-    | null;
-  individual?: boolean | null;
-  maxParticipants?: number | null;
-  accommodation?: string | null;
-  order?: number | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -241,20 +324,20 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'users';
-        value: number | User;
-      } | null)
-    | ({
-        relationTo: 'media';
-        value: number | Media;
-      } | null)
-    | ({
         relationTo: 'soins';
         value: number | Soin;
       } | null)
     | ({
         relationTo: 'formations';
         value: number | Formation;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -300,26 +383,51 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
+ * via the `definition` "soins_select".
  */
-export interface UsersSelect<T extends boolean = true> {
-  name?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
+export interface SoinsSelect<T extends boolean = true> {
+  active?: T;
+  order?: T;
+  title?: T;
+  eyebrow?: T;
+  description?: T;
+  details?: T;
+  image?: T;
+  durations?:
     | T
     | {
+        duration?: T;
+        price?: T;
         id?: T;
-        createdAt?: T;
-        expiresAt?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "formations_select".
+ */
+export interface FormationsSelect<T extends boolean = true> {
+  active?: T;
+  order?: T;
+  title?: T;
+  shortTitle?: T;
+  eyebrow?: T;
+  description?: T;
+  duration?: T;
+  hours?: T;
+  price?: T;
+  objectives?:
+    | T
+    | {
+        objective?: T;
+        id?: T;
+      };
+  individual?: T;
+  maxParticipants?: T;
+  accommodation?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -341,51 +449,26 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "soins_select".
+ * via the `definition` "users_select".
  */
-export interface SoinsSelect<T extends boolean = true> {
-  active?: T;
-  title?: T;
-  eyebrow?: T;
-  description?: T;
-  details?: T;
-  image?: T;
-  durations?:
-    | T
-    | {
-        duration?: T;
-        price?: T;
-        id?: T;
-      };
-  order?: T;
+export interface UsersSelect<T extends boolean = true> {
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "formations_select".
- */
-export interface FormationsSelect<T extends boolean = true> {
-  active?: T;
-  title?: T;
-  shortTitle?: T;
-  eyebrow?: T;
-  description?: T;
-  duration?: T;
-  hours?: T;
-  price?: T;
-  objectives?:
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
     | T
     | {
-        objective?: T;
         id?: T;
+        createdAt?: T;
+        expiresAt?: T;
       };
-  individual?: T;
-  maxParticipants?: T;
-  accommodation?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

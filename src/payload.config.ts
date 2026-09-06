@@ -2,12 +2,13 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
+import { fr } from "@payloadcms/translations/languages/fr";
 import { buildConfig } from "payload";
 
-import { Formations } from "./collections/Formations";
-import { Media } from "./collections/Media";
-import { Soins } from "./collections/Soins";
-import { Users } from "./collections/Users";
+import { Formations } from "./collections/Formations.ts";
+import { Media } from "./collections/Media.ts";
+import { Soins } from "./collections/Soins.ts";
+import { Users } from "./collections/Users.ts";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -17,14 +18,30 @@ export default buildConfig({
 
   admin: {
     user: Users.slug,
+    components: {
+      graphics: {
+        Icon: "/src/components/admin/UttaraBrand#UttaraIcon",
+        Logo: "/src/components/admin/UttaraBrand#UttaraLogo",
+      },
+    },
+    meta: {
+      titleSuffix: " — Uttara | Administration du site",
+    },
   },
 
   collections: [
-    Users,
-    Media,
     Soins,
     Formations,
+    Media,
+    Users,
   ],
+
+  i18n: {
+    fallbackLanguage: "fr",
+    supportedLanguages: {
+      fr,
+    },
+  },
 
   db: sqliteAdapter({
     client: {

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:payload": "payload run src/scripts/seedPayload.mts"
   },
   "dependencies": {
     "@payloadcms/db-sqlite": "^3.88.0",
