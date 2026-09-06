@@ -1,32 +1,11 @@
 import type { Metadata } from "next";
-import {
-  Allura,
-  Cormorant_Garamond,
-  Manrope,
-} from "next/font/google";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { StructuredData } from "@/components/seo/StructuredData";
+import { StructuredData } from "@/components/seo/StructuredData"; 
+import { siteFontVariables } from "@/app/site-fonts";
 
-import "./globals.css";
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["400", "500", "600"],
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-const allura = Allura({
-  subsets: ["latin"],
-  variable: "--font-script",
-  weight: "400",
-});
+import "../globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.passion-ayurveda.fr"),
@@ -112,7 +91,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${cormorant.variable} ${manrope.variable} ${allura.variable}`}
+        className={siteFontVariables}
       >
         <StructuredData />
         <div className="flex min-h-screen flex-col">

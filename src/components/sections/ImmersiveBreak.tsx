@@ -11,11 +11,6 @@ export function ImmersiveBreak() {
         className="absolute inset-0 h-full w-full object-cover"
       >
         <source
-          src="/videos/hero/uttara-break.webm"
-          type="video/webm"
-        />
-
-        <source
           src="/videos/hero/uttara-break.mp4"
           type="video/mp4"
         />

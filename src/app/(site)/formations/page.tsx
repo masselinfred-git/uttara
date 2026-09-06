@@ -5,6 +5,9 @@ import { FormationsCTA } from "@/components/sections/formations/FormationsCTA";
 import { FormationsHero } from "@/components/sections/formations/FormationsHero";
 import { FormationsIntro } from "@/components/sections/formations/FormationsIntro";
 import { FundingSection } from "@/components/sections/formations/FundingSection";
+import { getFormations } from "@/services/cms/getFormations";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Formations Ayurveda et massage ayurvédique",
@@ -23,12 +26,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function FormationsPage() {
+export default async function FormationsPage() {
+  const formations = await getFormations();
+
   return (
     <>
       <FormationsHero />
       <FormationsIntro />
-      <FormationList />
+      <FormationList formations={formations} />
       <FundingSection />
       <FormationsCTA />
     </>

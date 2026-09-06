@@ -1,9 +1,13 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { formations } from "@/config/formations";
+import type { PublicFormation } from "@/services/cms/types";
 
-export function FormationList() {
+type FormationListProps = {
+  formations: PublicFormation[];
+};
+
+export function FormationList({ formations }: FormationListProps) {
   return (
     <Section>
       <Container>
@@ -21,7 +25,7 @@ export function FormationList() {
         <div className="space-y-8 sm:space-y-10">
           {formations.map((formation, index) => (
             <article
-              key={formation.slug}
+              key={formation.id}
               className="overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--background-light)]"
             >
               <div className="grid lg:grid-cols-[0.32fr_0.68fr]">

@@ -16,11 +16,6 @@ export function HeroVideo() {
           className="h-full w-full object-cover object-center"
         >
           <source
-            src="/videos/hero/uttara-hero.webm"
-            type="video/webm"
-          />
-
-          <source
             src="/videos/hero/uttara-hero.mp4"
             type="video/mp4"
           />
