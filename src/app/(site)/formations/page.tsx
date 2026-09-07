@@ -6,6 +6,7 @@ import { FormationsHero } from "@/components/sections/formations/FormationsHero"
 import { FormationsIntro } from "@/components/sections/formations/FormationsIntro";
 import { FundingSection } from "@/components/sections/formations/FundingSection";
 import { getFormations } from "@/services/cms/getFormations";
+import { getFormationsPage } from "@/services/cms/getFormationsPage";
 
 export const dynamic = "force-dynamic";
 
@@ -27,14 +28,17 @@ export const metadata: Metadata = {
 };
 
 export default async function FormationsPage() {
-  const formations = await getFormations();
+  const [formations, formationsPage] = await Promise.all([
+    getFormations(),
+    getFormationsPage(),
+  ]);
 
   return (
     <>
       <FormationsHero />
       <FormationsIntro />
       <FormationList formations={formations} />
-      <FundingSection />
+      <FundingSection content={formationsPage} />
       <FormationsCTA />
     </>
   );

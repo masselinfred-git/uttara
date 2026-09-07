@@ -1,5 +1,18 @@
 import type { GlobalConfig } from "payload";
 
+function validatePublicUrl(value: string | null | undefined) {
+  if (!value) return true;
+
+  try {
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:"
+      ? true
+      : "Utilisez une adresse commençant par https:// ou http://.";
+  } catch {
+    return "Saisissez une adresse web complète et valide.";
+  }
+}
+
 export const CoordonneesSite: GlobalConfig = {
   slug: "coordonnees-site",
   label: "Coordonnées du site",
@@ -73,16 +86,19 @@ export const CoordonneesSite: GlobalConfig = {
           name: "instagram",
           label: "Instagram",
           type: "text",
+          validate: validatePublicUrl,
         },
         {
           name: "facebook",
           label: "Facebook",
           type: "text",
+          validate: validatePublicUrl,
         },
         {
           name: "shopUrl",
           label: "URL de la boutique",
           type: "text",
+          validate: validatePublicUrl,
         },
       ],
     },

@@ -7,6 +7,15 @@ export const metadata: Metadata = {
   title: "Politique de confidentialité",
   description:
     "Politique de confidentialité et protection des données personnelles du site Uttara.",
+  alternates: {
+    canonical: "/politique-confidentialite",
+  },
+  openGraph: {
+    title: "Politique de confidentialité | Uttara",
+    description:
+      "Politique de confidentialité et protection des données personnelles du site Uttara.",
+    url: "/politique-confidentialite",
+  },
 };
 
 export default function PrivacyPolicyPage() {

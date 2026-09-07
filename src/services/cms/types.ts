@@ -4,6 +4,7 @@ import type {
   CoordonneesSite,
   Document as PayloadDocument,
   Formation as PayloadFormation,
+  FormationsPage,
   Soin,
   Temoignage,
 } from "@/payload-types";
@@ -125,4 +126,20 @@ export type PublicDocument = {
   filename: string;
   mimeType?: string;
   fileType: "PDF" | "DOCX" | "XLSX" | "CSV" | "Fichier";
+};
+
+export type PublicFormationsPage = {
+  fundingEyebrow: NonNullable<FormationsPage["fundingEyebrow"]>;
+  fundingTitle: NonNullable<FormationsPage["fundingTitle"]>;
+  fundingIntro: NonNullable<FormationsPage["fundingIntro"]>;
+  qualiopiLabel: NonNullable<FormationsPage["qualiopiLabel"]>;
+  funders: string[];
+  fundingExplanation: NonNullable<FormationsPage["fundingExplanation"]>;
+  trainingRegistrationNumber: NonNullable<
+    FormationsPage["trainingRegistrationNumber"]
+  >;
+  trainingRegistrationLegalText: NonNullable<
+    FormationsPage["trainingRegistrationLegalText"]
+  >;
+  fundingNotice: NonNullable<FormationsPage["fundingNotice"]>;
 };

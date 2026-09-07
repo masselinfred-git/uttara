@@ -1,4 +1,5 @@
 import { unstable_noStore as noStore } from "next/cache";
+import { cache } from "react";
 import { getPayload } from "payload";
 
 import config from "@payload-config";
@@ -9,7 +10,7 @@ function textOrFallback(value: string | null | undefined, fallback: string) {
   return value?.trim() || fallback;
 }
 
-export async function getSiteCoordinates(): Promise<PublicSiteCoordinates> {
+const loadSiteCoordinates = async (): Promise<PublicSiteCoordinates> => {
   noStore();
 
   try {
@@ -68,4 +69,6 @@ export async function getSiteCoordinates(): Promise<PublicSiteCoordinates> {
     );
     return { ...fallbackSiteCoordinates };
   }
-}
+};
+
+export const getSiteCoordinates = cache(loadSiteCoordinates);

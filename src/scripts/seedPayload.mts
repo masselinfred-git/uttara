@@ -10,6 +10,7 @@ import { formations as fallbackFormations } from "../config/formations.ts";
 import {
   fallbackAboutContent,
   fallbackHomeContent,
+  fallbackFormationsPage,
   fallbackSiteCoordinates,
   fallbackTestimonials,
 } from "../config/cmsFallbacks.ts";
@@ -35,7 +36,7 @@ async function schemaIsReady() {
 
   try {
     const result = await client.execute({
-      sql: "SELECT name FROM sqlite_master WHERE type = ? AND name IN (?, ?, ?, ?, ?)",
+      sql: "SELECT name FROM sqlite_master WHERE type = ? AND name IN (?, ?, ?, ?, ?, ?)",
       args: [
         "table",
         "temoignages",
@@ -43,10 +44,11 @@ async function schemaIsReady() {
         "accueil",
         "a_propos",
         "coordonnees_site",
+        "formations_page",
       ],
     });
 
-    return result.rows.length === 5;
+    return result.rows.length === 6;
   } finally {
     client.close();
   }
@@ -351,6 +353,45 @@ async function seedGlobals(payload: Payload) {
     });
     stats.globals.created += 1;
     console.log("- Initialisé : À propos de Laëtitia");
+  }
+
+  const formationsPage = await payload.findGlobal({
+    slug: "formations-page",
+  });
+  if (
+    hasContent([
+      formationsPage.fundingEyebrow,
+      formationsPage.fundingTitle,
+      formationsPage.fundingIntro,
+      formationsPage.qualiopiLabel,
+      formationsPage.funders,
+      formationsPage.fundingExplanation,
+      formationsPage.trainingRegistrationNumber,
+      formationsPage.trainingRegistrationLegalText,
+      formationsPage.fundingNotice,
+    ])
+  ) {
+    stats.globals.skipped += 1;
+    console.log("- Ignoré (déjà renseigné) : Page Formations");
+  } else {
+    await payload.updateGlobal({
+      slug: "formations-page",
+      data: {
+        fundingEyebrow: fallbackFormationsPage.fundingEyebrow,
+        fundingTitle: fallbackFormationsPage.fundingTitle,
+        fundingIntro: fallbackFormationsPage.fundingIntro,
+        qualiopiLabel: fallbackFormationsPage.qualiopiLabel,
+        funders: fallbackFormationsPage.funders.map((label) => ({ label })),
+        fundingExplanation: fallbackFormationsPage.fundingExplanation,
+        trainingRegistrationNumber:
+          fallbackFormationsPage.trainingRegistrationNumber,
+        trainingRegistrationLegalText:
+          fallbackFormationsPage.trainingRegistrationLegalText,
+        fundingNotice: fallbackFormationsPage.fundingNotice,
+      },
+    });
+    stats.globals.created += 1;
+    console.log("- Initialisé : Page Formations");
   }
 }
 

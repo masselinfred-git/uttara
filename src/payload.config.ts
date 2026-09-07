@@ -14,6 +14,7 @@ import { Users } from "./collections/Users.ts";
 import { Accueil } from "./globals/Accueil.ts";
 import { APropos } from "./globals/APropos.ts";
 import { CoordonneesSite } from "./globals/CoordonneesSite.ts";
+import { FormationsPage } from "./globals/FormationsPage.ts";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -47,6 +48,7 @@ export default buildConfig({
     Accueil,
     APropos,
     CoordonneesSite,
+    FormationsPage,
   ],
 
   i18n: {

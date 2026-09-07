@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: "Mentions légales",
   description:
     "Mentions légales du site Uttara, Ayurveda, soins et formations.",
+  alternates: {
+    canonical: "/mentions-legales",
+  },
+  openGraph: {
+    title: "Mentions légales | Uttara",
+    description:
+      "Mentions légales du site Uttara, Ayurveda, soins et formations.",
+    url: "/mentions-legales",
+  },
 };
 
 export default function MentionsLegalesPage() {

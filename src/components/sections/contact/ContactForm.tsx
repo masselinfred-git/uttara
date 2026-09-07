@@ -50,6 +50,7 @@ export function ContactForm() {
           subject: form.subject,
           message: form.message,
           website: form.website,
+          privacy: form.privacy,
         }),
       });
 
@@ -93,7 +94,11 @@ export function ContactForm() {
       </p>
 
       {status === "success" ? (
-        <div className="mt-10 rounded-[2rem] bg-[var(--surface)] p-8">
+        <div
+          className="mt-10 rounded-[2rem] bg-[var(--surface)] p-8"
+          role="status"
+          aria-live="polite"
+        >
           <p className="font-script text-3xl text-[var(--earth)]">
             Merci
           </p>
@@ -274,7 +279,10 @@ export function ContactForm() {
           </label>
 
           {status === "error" && (
-            <div className="rounded-2xl border border-red-300 bg-red-50 px-5 py-4 text-sm text-red-800">
+            <div
+              className="rounded-2xl border border-red-300 bg-red-50 px-5 py-4 text-sm text-red-800"
+              role="alert"
+            >
               {errorMessage}
             </div>
           )}

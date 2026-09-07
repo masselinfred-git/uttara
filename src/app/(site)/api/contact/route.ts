@@ -8,6 +8,14 @@ type ContactPayload = {
   subject?: string;
   message?: string;
   website?: string;
+  privacy?: boolean;
+};
+
+const subjectLabels: Record<string, string> = {
+  soin: "Demande concernant un soin",
+  formation: "Demande concernant une formation",
+  financement: "Demande de financement de formation",
+  autre: "Autre demande",
 };
 
 function isValidEmail(email: string) {
@@ -16,7 +24,33 @@ function isValidEmail(email: string) {
 
 export async function POST(request: Request) {
   try {
-    const body = (await request.json()) as ContactPayload;
+    let body: ContactPayload;
+
+    try {
+      const input: unknown = await request.json();
+      if (!input || typeof input !== "object" || Array.isArray(input)) {
+        throw new Error("Corps JSON invalide");
+      }
+      body = input as ContactPayload;
+    } catch {
+      return NextResponse.json(
+        { error: "La demande envoyée est invalide." },
+        { status: 400 },
+      );
+    }
+
+    const stringFields = ["name", "email", "phone", "subject", "message", "website"] as const;
+    if (
+      stringFields.some(
+        (field) =>
+          body[field] !== undefined && typeof body[field] !== "string",
+      )
+    ) {
+      return NextResponse.json(
+        { error: "La demande envoyée est invalide." },
+        { status: 400 },
+      );
+    }
 
     const {
       name = "",
@@ -25,6 +59,7 @@ export async function POST(request: Request) {
       subject = "",
       message = "",
       website = "",
+      privacy = false,
     } = body;
 
     // Honeypot anti-spam :
@@ -43,6 +78,13 @@ export async function POST(request: Request) {
       );
     }
 
+    if (name.trim().length > 120) {
+      return NextResponse.json(
+        { error: "Le nom est trop long." },
+        { status: 400 },
+      );
+    }
+
     if (!email.trim() || !isValidEmail(email)) {
       return NextResponse.json(
         { error: "L’adresse e-mail est invalide." },
@@ -50,9 +92,23 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!subject.trim()) {
+    if (email.trim().length > 254 || phone.trim().length > 40) {
+      return NextResponse.json(
+        { error: "Les coordonnées saisies sont trop longues." },
+        { status: 400 },
+      );
+    }
+
+    if (!subjectLabels[subject]) {
       return NextResponse.json(
         { error: "Veuillez sélectionner le type de demande." },
+        { status: 400 },
+      );
+    }
+
+    if (privacy !== true) {
+      return NextResponse.json(
+        { error: "Votre consentement est nécessaire pour envoyer ce message." },
         { status: 400 },
       );
     }
@@ -104,15 +160,7 @@ export async function POST(request: Request) {
       },
     });
 
-    const subjectLabels: Record<string, string> = {
-      soin: "Demande concernant un soin",
-      formation: "Demande concernant une formation",
-      financement: "Demande de financement de formation",
-      autre: "Autre demande",
-    };
-
-    const readableSubject =
-      subjectLabels[subject] ?? "Nouvelle demande depuis Uttara";
+    const readableSubject = subjectLabels[subject];
 
     await transporter.sendMail({
       from: `"Site Uttara" <${SMTP_USER}>`,

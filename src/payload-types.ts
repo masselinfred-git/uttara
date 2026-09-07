@@ -99,11 +99,13 @@ export interface Config {
     accueil: Accueil;
     'a-propos': APropo;
     'coordonnees-site': CoordonneesSite;
+    'formations-page': FormationsPage;
   };
   globalsSelect: {
     accueil: AccueilSelect<false> | AccueilSelect<true>;
     'a-propos': AProposSelect<false> | AProposSelect<true>;
     'coordonnees-site': CoordonneesSiteSelect<false> | CoordonneesSiteSelect<true>;
+    'formations-page': FormationsPageSelect<false> | FormationsPageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -720,6 +722,52 @@ export interface CoordonneesSite {
   createdAt?: string | null;
 }
 /**
+ * Textes de la section « Financer sa formation ». La mise en page reste gérée par le site.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "formations-page".
+ */
+export interface FormationsPage {
+  id: number;
+  /**
+   * Petit titre manuscrit affiché au-dessus de la section.
+   */
+  fundingEyebrow?: string | null;
+  fundingTitle?: string | null;
+  /**
+   * Formulation conseillée : « Organisme de formation certifié Qualiopi ».
+   */
+  qualiopiLabel?: string | null;
+  /**
+   * Texte placé avant le numéro de déclaration d’activité.
+   */
+  fundingIntro?: string | null;
+  fundingExplanation?: string | null;
+  /**
+   * Ajoutez, supprimez ou réordonnez les organismes tels qu’ils apparaissent sur le site.
+   */
+  funders?:
+    | {
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Rappelez que la prise en charge dépend de l’éligibilité et de l’accord du financeur.
+   */
+  fundingNotice?: string | null;
+  /**
+   * Numéro actuel : 93050101105.
+   */
+  trainingRegistrationNumber?: string | null;
+  /**
+   * Cette formulation légale doit rester exacte et ne doit pas parler d’agrément de l’État.
+   */
+  trainingRegistrationLegalText?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "accueil_select".
  */
@@ -792,6 +840,29 @@ export interface CoordonneesSiteSelect<T extends boolean = true> {
   shopUrl?: T;
   appointmentText?: T;
   fundingText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "formations-page_select".
+ */
+export interface FormationsPageSelect<T extends boolean = true> {
+  fundingEyebrow?: T;
+  fundingTitle?: T;
+  qualiopiLabel?: T;
+  fundingIntro?: T;
+  fundingExplanation?: T;
+  funders?:
+    | T
+    | {
+        label?: T;
+        id?: T;
+      };
+  fundingNotice?: T;
+  trainingRegistrationNumber?: T;
+  trainingRegistrationLegalText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

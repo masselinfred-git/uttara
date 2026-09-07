@@ -153,6 +153,11 @@ export function FormationList({ formations }: FormationListProps) {
                               download={isPdf ? undefined : document.filename}
                               target={isPdf ? "_blank" : undefined}
                               rel={isPdf ? "noopener noreferrer" : undefined}
+                              aria-label={
+                                isPdf
+                                  ? `${document.title} (PDF, s’ouvre dans un nouvel onglet)`
+                                  : `${document.title} (${document.fileType}, téléchargement)`
+                              }
                               className="flex items-center justify-between gap-4 rounded-2xl border border-[var(--border)] px-5 py-4 text-sm transition hover:border-[var(--forest)] sm:text-base"
                             >
                               <span>

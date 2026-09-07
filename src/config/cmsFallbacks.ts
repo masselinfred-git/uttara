@@ -103,3 +103,25 @@ export const fallbackAboutContent = {
     "Uttara est l’espace dans lequel je rassemble aujourd’hui ces pratiques et cette expérience pour accompagner et transmettre.",
   photo: "/images/laititia/portrait.webp",
 } as const;
+
+export const fallbackFormationsPage = {
+  fundingEyebrow: "Financer sa formation",
+  fundingTitle: "Des possibilités de prise en charge selon votre situation.",
+  fundingIntro:
+    "Uttara est un organisme de formation déclaré sous le numéro d’activité",
+  qualiopiLabel: "Organisme de formation certifié Qualiopi",
+  funders: [
+    "FAFCEA",
+    "France Travail",
+    "Département",
+    "OPCO",
+    "Autres fonds de formation",
+  ],
+  fundingExplanation:
+    "L’organisme est certifié Qualiopi. Selon votre statut, votre activité professionnelle et la formation choisie, une demande de prise en charge peut être étudiée auprès d’un organisme financeur.",
+  trainingRegistrationNumber: "93050101105",
+  trainingRegistrationLegalText:
+    "Cet enregistrement ne vaut pas agrément de l’État.",
+  fundingNotice:
+    "Les conditions varient selon les dispositifs. Toute prise en charge reste soumise à l’éligibilité de la formation, à votre situation et à l’accord préalable du financeur concerné.",
+} as const;
